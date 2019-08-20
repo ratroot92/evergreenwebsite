@@ -10,6 +10,10 @@
 <li><a href="#div2" class="nav-link text-white font-weight-bold" data-toggle="tab" >Items</a></li>
 
 <li><a href="#div3" class="nav-link text-white font-weight-bold" data-toggle="tab" >Categories</a></li>
+
+<li><a href="#div4" class="nav-link text-white font-weight-bold" data-toggle="tab" >View Items</a></li>
+
+
 </ul>
 
 </div><!-- end of dashboard -->
@@ -27,231 +31,230 @@
 </div>
 @endif
 <!-- end of alert -->
-<div class="tab-content">
 
-<div class="tab-pane active" id="div1"><!-- start of div1-->
+
+
+<div class="tab-content">
+<!-- ajx message displayed here -->
+<div class="row">
+<div class="col-md-12  text-center alert alert-success" id="msg_div">
+<p id="msg_para" class="font-weight-bold text-dark"></p>
+</div>
+</div>
+<!-- end of ajax message displayed here -->
+
+
+<div class="tab-pane " id="div1"><!-- start of div1-->
 div1
 </div><!-- end of div1 -->
 
 
 
-<div class="tab-pane" id="div2"><!-- start of div2-->
-<div class="container-fluid ">
-<div class="row bg-dark">
-<div class="col-md-12  p-1">
-<button type="button" class="btn btn-outline-success " id="btn1">Add Item<span class="caret  text-white"></span></button>
-</div>	
-</div>
+<div class="tab-pane " id="div2"><!-- start of div2-->
 
-
-<div class="row border border-warning" id="hideable_div_1">
-
-<div class="col-md-6">
-
-
-
-
-<form method="post" action="{{route('addProduct')}}" enctype="multipart/form-data" name="form1">
-<div class="form-group">
-<span class="font-weight-bold text-dark">Item Id:</span>
-<input type="number" name="id" class="form-control form-control-sm" readonly>
-</div>
-
-
-<div class="form-group">
-<span class="font-weight-bold text-dark">Item Name:</span>
-<input type="text" name="name" class="form-control form-control-sm" required>
- @if($errors->has('name'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('name') }}</div>
-@endif
-</div>
-
-<div class="form-group">
-<span class="font-weight-bold text-dark">Item Price:</span>
-<input type="number" name="price" class="form-control form-control-sm" required>
-@if($errors->has('price'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('price') }}</div>
-@endif
-</div>
-
-
-
-
-
-
-<div class="form-group">
-<span class="font-weight-bold text-dark">Old Price:</span>
-<input type="number" name="oldprice" class="form-control form-control-sm" required>
-@if($errors->has('oldprice'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('oldprice') }}</div>
-@endif
-</div>
-
-
-<div class="form-group">
-<span class="font-weight-bold text-dark">Item Tags</span>
-<select name="tags" class="js-example-basic-multiple js-states form-control"  >
-<option value="dry fruit">dry fruit</option>
-<option value="condiments">condiments</option>
-<option value="dates">dates</option>
-
-</select>
-@if($errors->has('tags'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('tags') }}</div>
-@endif
-</div>
-
-
-<div class="form-group">
-<span class="font-weight-bold text-dark">Item Category</span>
-<select name="category" class="js-example-basic-multiple js-states form-control"  >
-<option value="dry fruit">dry fruit</option>
-<option value="condiments">condiments</option>
-<option value="dates">dates</option>
-
-</select>
-@if($errors->has('category'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('category') }}</div>
-@endif
-</div>
-
-
-<div class="form-group">
-<span class="font-weight-bold text-dark">Item Sub Category</span>
-<select name="sub_category" class="js-example-basic-multiple js-states form-control" >
-<option value="dry fruit">dry fruit</option>
-<option value="condiments">condiments</option>
-<option value="dates">dates</option>
-
-</select>
-@if($errors->has('sub_category'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('sub_category') }}</div>
-@endif
-</div>
-
-
-
-<div class="form-group">
-<input type="file" name="image">
-@if($errors->has('image'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('image') }}</div>
-@endif
-</div>
-
-
-
-<!-- 
-<div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-  </div>
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" id="inputGroupFile01" name="img_file"
-      aria-describedby="inputGroupFileAddon01">
-    <label class="custom-file-label" for="inputGroupFile01">Choose image file for item </label>
-  </div>
-</div> -->
-
-
-<input type="submit" class="btn btn-success mt-3" name="submit" value="submit" >
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-</form>
+<div id="renderitems" class="row">
 
 
 </div>
+<div id="appendmodal"></div>
 
-</div>
-
-</div>
 </div><!-- end of div2 -->
 
-<div class="tab-pane " id="div3"><!-- start of div3-->
-<div class="conatiner-fluid">
-<div class="row">
-<div class="col-md-12">
-<button type="button" class="btn btn-dark" id="btn3">ADD CATEGORIES<span class="caret text-white"></span></button>
-</div>
+<div class="tab-pane  active" id="div3"><!-- start of div3-->
+
+<div id="rendercategory" class="row">
 </div>
 
-
-<div class="row" id="hideable_div_3">
-<div class="col-md-6">
-<form action="{{route('addCategory')}}" method="post" enctype="multipart/form-data" name="form2">
-
-
-<div class="form-group">
-<span class="text-dark font-weight-bold">Category ID:</span>
-<input type="number" name="id" class="form-control form-control-sm" readonly>
-@if($errors->has('id'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('id') }}</div>
-@endif
-</div>
-
-<div class="form-group">
-<span class="text-dark font-weight-bold">Category Name:</span>
-<input type="text" name="name" class="form-control form-control-sm" required>
-@if($errors->has('name'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('name') }}</div>
-@endif
-</div>
-
-<div class="form-group">
-<span class="text-dark font-weight-bold">SubCategory Name:</span>
-<input type="text" name="sub_category" class="form-control form-control-sm" required>
-@if($errors->has('sub_category'))
- <div class=" alert alert-danger  font-weight-bold">&spades;{{ $errors->first('sub_category') }}</div>
-@endif
-</div>
-
-
-<input type="submit" class="btn btn-success mt-2" name="submit" value="submit">
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-</form>
-</div>
-
-</div>
-</div>
+<div id="appendmodel_category"></div>
 </div><!-- end of div3 -->
 
+
+
+
+
+
+<div class="tab-pane " id="div4"><!-- start of div4-->
+
+<div class="conatiner-fluid">
+
+
+
+
+
+
+
+</div>
+</div><!-- end of div4 -->
+
+
+
+
+
+
 </div><!-- end of tab content -->
+</div><!-- end of col-md- 10-->
 
 
 
 
 
-</div>
-</div><!-- end of tabs -->
-</div>
-</div>
+
+
+
+</div><!-- end of row -->
+</div><!-- end of page -->
+
+
+
 <script type="text/javascript">
+$(document).ready(function(){
+$('#msg_div').hide();
+
+//end
+
+//render view
+$.get('{{URL::to("itemview")}}',function(data){
+$('#renderitems').empty().append(data);
+});//end
+
+
+//open modal on add item button
+$('#renderitems').on('click','#btn_additem',function(){
+$.get('{{URL::to("additemmodal")}}',function(data){
+$('#appendmodal').empty().append(data);
+$('#model_additem').modal('show');
+//alert("hi");
+});
+
+});//end 
+
+
+// start of insert addproduct 
+$('#appendmodal').on('submit','#addform',function(e){
+e.preventDefault();
+
+
+            $.ajax({
+            url:$(this).attr('action'),
+                type:'POST',
+				 data:new FormData(this),                  
+                contentType: false,
+                processData: false,
+   				dataType:"json",  
+                success: function(data) {
+$('#msg_div').show();
+$('#msg_para').html("Item Has been Sucessfully saved to Database  ... ");
+$('#msg_para').fadeOut(15000);	
+$('#model_additem').modal('hide');
+var trHTML = '';
+          $.each(data, function (key,items) {
+             trHTML += 
+                '<tr><td>' + items.id + 
+                '</td><td>' + items.name + 
+                '</td><td>' + items.desc + 
+                '</td><td>' + items.old_price + 
+                '</td><td>' + items.actual_price + 
+                '</td><td>' + items.category + 
+                '</td><td>' + items.sub_category + 
+				  '</td><td>' + items.tags + 
+                '</td></tr>';     
+          });
+  $('#item_table').append(trHTML);
+
+                }
+            });
 
 
 
- btn1.addEventListener('click',function(){
-var div_1 =document.getElementById("hideable_div_1");
-if (div_1.style.display === "none") {
-div_1.style.display = "block";
-}
- else {
- div_1.style.display = "none";}
-  });
+
+}); //end  of insert addproduct 
+
+
+// start of call edit modal
+$('#renderitems').on('click','.btnManage',function(){
+var id=$(this).data('task');
+$.get('{{URL::to("edititemmodal")}}/'+id,function(data){
+$('#appendmodal').empty().append(data);
+$('#edit_item_modal').modal('show');
+});
+
+});// end of call edit modal
+
+
+// start of update record 
+$('#appendmodal').on('submit','#edititem_form',function(e){
+e.preventDefault();
+var formdata=new FormData(this);
+
+
+ $.ajax({
+            url:$(this).attr('action'),
+                type:'POST',
+				 data:new FormData(this),                  
+                contentType: false,
+                processData: false,
+   				//dataType:"json",  
+                success: function(data) {
+			$('#renderitems').empty().append(data);
+			$('#edit_item_modal').modal('hide');
+                }
+            });
+
+
+});
+//end of delete record 
+$('#renderitems').on('click','.btnDelete',function(e){
+var id=$(this).data('task');
+$.post('{{URL::to("deleteProduct")}}/'+id,function(data){
+$('#renderitems').empty().append(data);
+});
+});//end of delete record
+
+
+//codes for category 
+//show add category view 
+$.get('{{URL::to("categoryview")}}',function(data){
+$('#rendercategory').empty().append(data);
+
+
+});//end of show category view 
+
+//start of modal add category trigger 
+$('#rendercategory').on('click','#btn_addcategory',function(){
+$.get('{{URL::to("addcategorymodel")}}',function(data){
+$('#appendmodel_category').empty().append(data);
+$('#addcategory_model').modal('show');
+});
+});//end of modal add category trigger 
+
+
+//start of form submission to add category 
+$('#rendercategory').on('submit','#addCategoryForm',function(e){
+e.preventDefault();
+ var formData = $(this).serialize();
+$.ajax({
+            url:$(this).attr('action'),
+                type:'POST',
+				 data:formData,                  
+               // contentType: false,
+               // processData: false,
+   				//dataType:"json",  
+                success: function(data) {
+			$('#rendercategory').empty().append(data);
+			console.log(data);
+                },
+			error:function(data){
+			console.log(error);
+				}
+            });
+});//end of form submission to add category 
 
 
 
-btn3.addEventListener('click',function(){
-var div_3 =document.getElementById("hideable_div_3");
-if (div_3.style.display === "none") {
-div_3.style.display = "block";
-}
- else {
- div_3.style.display = "none";}
-  });
-
-
-
+});//end of  doucument load
 
 </script>
+
+
 @stop
 

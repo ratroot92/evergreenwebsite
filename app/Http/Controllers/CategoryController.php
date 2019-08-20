@@ -10,26 +10,42 @@ class CategoryController extends Controller
 {
    public Function addCategory(Request $request){
 
-$validator = Validator::make($request->all(), [
+//  $validator = Validator::make($request->all(), [
          
-			'name'=>'required|max:25|min:3',
-			'sub_cateogry'=>'required',
-        ]);
+// 			'cat_name'=>'required|max:25|min:3',
+// 			'cat_sub_cateogry'=>'required',
+// ]);
 
-        if ($validator->fails()) {
-                return redirect('admin')
-                            ->withErrors($validator)
-                            ->withInput();
-            }
+//         if ($validator->fails()) {
+//                 return redirect('/admin')
+//                            ->withErrors($validator)
+//                            ->withInput();
+//           }
 
+// else{
 $category=new Category();
-$category->name 				= $request->name;
-$category->sub_category 		= $request->sub_category;
+$category->name= $request->cat_name;
+$category->sub_category= $request->cat_sub_category;
 $category->save();
-
- return redirect('/admin')->with('message','Succesfull ! Added a new category');
-
+return view()
+$categories=Category::all();
+return view('category/showcategory',compact('categories'));
 }
+
+public Function index (){
+$categories=Category::all();
+return view('category/showcategory',compact('categories'));
+}
+
+public Function add (){
+
+return view('category/addcategory');
+}
+
+
+
+
+
 
 
 

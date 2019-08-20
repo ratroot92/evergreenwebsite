@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminsTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->bigInteger('a_id');
-   			$table->string('a_name')->nullable();
-			$table->string('a_email')->nullable();
-			$table->string('a_password')->nullable();
-			$table->string('a_mobile')->nullable();
+        Schema::create('files', function (Blueprint $table) {
+            $table->bigIncrements('id');
+ 			$table->bigInteger('item_id')->nullable();
+			$table->string('description')->nullable();
+			$table->mediumText('src')->nullable();
             $table->timestamps();
         });
-
-
     }
 
     /**
@@ -32,6 +29,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('files');
     }
 }
