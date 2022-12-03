@@ -59,8 +59,8 @@ export default function App() {
           {/* <Navbar /> */}
           <Routes>
             {/* <Route element={<ProtectedRoute />}> */}
-            <Route path="/test-login" element={<MuiAdminLogin />} />
-            <Route path="/test-dashboard" element={<MuiAdminDashboard />} />
+            {/* <Route path="/test-login" element={<MuiAdminLogin />} />
+            <Route path="/test-dashboard" element={<MuiAdminDashboard />} /> */}
             <Route path="/" element={<MarketPage />} />
             {/* </Route> */}
             {/* User Routes Start */}
@@ -78,10 +78,12 @@ export default function App() {
 
             {/* Admin Routes Start */}
             <Route element={<UnProtectedAdminRoute />}>
-              <Route path="/admin/login" element={<AdminLoginPage />} />
+              {/* <Route path="/admin/login" element={<AdminLoginPage />} /> */}
+              <Route path="/admin/login" element={<MuiAdminLogin />} />
             </Route>
             <Route element={<ProtectedAdminRoute />}>
-              <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+              {/* <Route path="/admin/dashboard" element={<AdminDashboardPage />} /> */}
+              <Route path="/admin/dashboard" element={<MuiAdminDashboard />} />
             </Route>
             <Route element={<ProtectedAdminRoute />}>
               <Route path="/admin/profile" element={<AdminProfilePage />} />
