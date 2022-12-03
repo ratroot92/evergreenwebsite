@@ -13,14 +13,20 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 // import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+
+import { useDispatch } from 'react-redux';
+import { adminLogout } from '../../redux/actions/auth-actions';
+
 import { mainListItems, secondaryListItems } from './DashboardItems/listItems';
 import Chart from './DashboardItems/Chart';
 import Deposits from './DashboardItems/Deposits';
 import Orders from './DashboardItems/Orders';
+
 
 function Copyright() {
   return (
@@ -86,6 +92,12 @@ function DashboardContent() {
     setOpen(!open);
   };
 
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(adminLogout());
+  };
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -111,6 +123,20 @@ function DashboardContent() {
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
               Dashboard
             </Typography>
+            <Button
+              variant="outlined"
+              onClick={handleLogout}
+              sx={{
+                backgroundColor: 'white',
+                color: 'blue',
+                '&:hover': {
+                  backgroundColor: '#eee',
+                  color: 'blue',
+                },
+              }}
+            >
+              Logout
+            </Button>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
