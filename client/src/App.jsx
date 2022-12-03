@@ -20,6 +20,11 @@ import ProtectedUserRoute from './hoc/ProtectedUserRoute';
 import UnProtectedUserRoute from './hoc/UnProctedUserRoute';
 import UnProtectedAdminRoute from './hoc/UnProtectedAdminRoute';
 import ProtectedAdminRoute from './hoc/ProtectedAdminRoute';
+
+// MUI Admin Pages
+import MuiAdminLogin from './Pages/MUI_Pages/MuiAdminLogin';
+import MuiAdminDashboard from './Pages/MUI_Pages/MuiAdminDashboard';
+
 const override = {
   display: 'block',
   margin: '0 auto',
@@ -39,7 +44,8 @@ export default function App() {
   }, []);
 
   return (
-    <div className="row">
+    // <div className="row">
+    <>
       {loading ? (
         <div className="row">
           <div className="col-md-12">
@@ -53,6 +59,8 @@ export default function App() {
           {/* <Navbar /> */}
           <Routes>
             {/* <Route element={<ProtectedRoute />}> */}
+            <Route path="/test-login" element={<MuiAdminLogin />} />
+            <Route path="/test-dashboard" element={<MuiAdminDashboard />} />
             <Route path="/" element={<MarketPage />} />
             {/* </Route> */}
             {/* User Routes Start */}
@@ -97,7 +105,8 @@ export default function App() {
           </Routes>
         </>
       )}
-    </div>
+    </>
+    // </div>
   );
 }
 
