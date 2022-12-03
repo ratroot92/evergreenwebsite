@@ -19,14 +19,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { adminLogout } from '../../redux/actions/auth-actions';
 
 import { mainListItems, secondaryListItems } from './DashboardItems/listItems';
 import Chart from './DashboardItems/Chart';
 import Deposits from './DashboardItems/Deposits';
 import Orders from './DashboardItems/Orders';
-
 
 function Copyright() {
   return (
@@ -93,6 +92,15 @@ function DashboardContent() {
   };
 
   const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+
+  React.useEffect(() => {
+    console.log('useSelector dataaa => ', user.email);
+    console.log('useSelector mobile => ', user.mobile);
+    console.log('useSelector role => ', user.role.name);
+    console.log('useSelector name => ', user.username);
+  }, []);
 
   const handleLogout = () => {
     dispatch(adminLogout());
@@ -199,6 +207,12 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
+                  <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 0.3 }}>
+                    Welcome {user.username}!
+                  </Typography>
+                  <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 0.3 }}>
+                    Role: {user.role.name}
+                  </Typography>
                   <Deposits />
                 </Paper>
               </Grid>
