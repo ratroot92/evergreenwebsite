@@ -1,6 +1,11 @@
+/* eslint-disable import/prefer-default-export */
 // /* eslint-disable no-unused-vars */
 // import apiServer from '../../config/axios.config';
 // import { startLoading, stopLoading } from './ui-actions';
+
+import { startLoading, stopLoading } from './ui-actions';
+
+const { default: apiServer } = require('../../config/axios.config');
 
 // const startSetLogin = (payload) => async (dispatch) => {
 //   try {
@@ -18,11 +23,7 @@
 //   }
 // };
 
-
 // const startSetAuth = () => async (dispatch) => {
-//   console.log("======================================")
-//   console.log("startSetAuth")
-//   console.log("======================================")
 
 //   try {
 //     const { status, data } = await apiServer.get(`/auth/is-authenticated`);
@@ -34,25 +35,42 @@
 //   } catch (err) {
 //     dispatch({ type: 'SET_IS_AUTHENTICATED', payload: false });
 //   } finally {
-//     console.log("Finally")
 //     dispatch(stopLoading());
 //   }
 // };
 
-// const startLogout = () => async (dispatch) => {
-//   try {
-//     dispatch(startLoading());
-//     const { status } = await apiServer.get(`/auth/logout`);
-//     if (status === 200) {
-//       dispatch({ type: 'SET_LOGOUT', payload: false });
-//     } else {
-//       dispatch({ type: 'SET_LOGOUT', payload: true });
-//     }
-//   } catch (err) {
-//     dispatch({ type: 'SET_LOGOUT', payload: true });
-//   } finally {
-//     dispatch(stopLoading());
-//   }
-// };
+const adminLogout = () => async (dispatch) => {
+  try {
+    // dispatch(startLoading());
+    const { status } = await apiServer.get(`/auth/logout`);
+    if (status === 200) {
+      dispatch({ type: 'DO_ADMIN_LOGIN', payload: { user: null, isAuthenticated: false } });
+    } else {
+      //   dispatch({ type: 'DO_ADMIN_LOGIN', payload: true });
+    }
+  } catch (err) {
+    // dispatch({ type: 'DO_ADMIN_LOGIN', payload: true });
+  } finally {
+    // dispatch(stopLoading());
+  }
+};
 
 // export { startSetLogin, startSetAuth, startLogout };
+
+const adminLogin = (payload) => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { status, data } = await apiServer.post(`/auth/admin/login`, payload);
+    if (status === 200) {
+      dispatch({ type: 'DO_ADMIN_LOGIN', payload: data.data });
+    } else {
+      dispatch({ type: 'DO_ADMIN_LOGIN', payload: { user: null, isAuthenticated: false } });
+    }
+  } catch (err) {
+    dispatch({ type: 'DO_ADMIN_LOGIN', payload: { user: null, isAuthenticated: false } });
+  } finally {
+    dispatch(stopLoading());
+  }
+};
+
+export { adminLogin, adminLogout };

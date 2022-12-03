@@ -5,11 +5,8 @@ import { Navigate, Outlet } from 'react-router-dom';
 import React from 'react';
 
 export default function UnProtectedUserRoute({ element: Component, ...rest }) {
-  // const { isAuthenticated, user } = useSelector((state) => state.auth);
-  // console.log('UnProtectedUserRoute[if]', isAuthenticated, user);
-  const isAuthenticated = false;
-  console.log('UnProtectedUserRoute', isAuthenticated);
-  if (!isAuthenticated) {
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  if (!user && !isAuthenticated) {
     return <Outlet />;
   }
 

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import './AdminLoginPage.css';
 import handleAction from '../../../redux/actions';
+import { adminLogin } from '../../../redux/actions/auth-actions';
 
 const useYupValidationResolver = (validationSchema) =>
   React.useCallback(
@@ -68,7 +69,7 @@ function AdminLoginPage(props) {
         payload: username,
         password,
       };
-      // dispatch(handleAction({ url: '/auth/admin/login', type: 'DO_ADMIN_LOGIN', reqType: 'post', payload: requestPayload }));
+      dispatch(adminLogin(requestPayload));
     } catch (err) {
       toast(err.message);
     }

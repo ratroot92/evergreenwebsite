@@ -3,19 +3,19 @@ const initialState = {
   user: null,
 };
 const authReducer = (state = initialState, action = {}) => {
-
-  // console.log("==================================")
-  // console.log("action.type          ==>", action.type)
-  // console.log("action.payload       ==>", action.payload)
-  // console.log("==================================")
+  console.log('==================================');
+  console.log('action.type          ==>', action.type);
+  console.log('action.payload       ==>', action.payload);
+  console.log('==================================');
   switch (action.type) {
-
     case 'SET_LOGIN':
       return { ...state, user: action.payload.user, isAuthenticated: action.payload.isAuthenticated };
     case 'SET_IS_AUTHENTICATED':
-      return { ...state, isAuthenticated: action.payload.isAuthenticated, user: action.payload.user, }
+      return { ...state, isAuthenticated: action.payload.isAuthenticated, user: action.payload.user };
     case 'SET_LOGOUT':
-      return initialState
+      return initialState;
+    case 'DO_ADMIN_LOGIN':
+      return { ...state, isAuthenticated: action.payload.isAuthenticated, user: action.payload.user };
     default:
       return state;
   }
