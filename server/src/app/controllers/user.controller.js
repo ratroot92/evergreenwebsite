@@ -1,7 +1,6 @@
 const { SendResponse, CatchAsync } = require('../../common/common.utils');
 const repoProvider = require('../repo');
 
-
 const controller = {
     repo: 'admin/UserRepository',
     create: CatchAsync(async (req, res) =>
