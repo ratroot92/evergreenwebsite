@@ -1,0 +1,32 @@
+- username: alice
+  mobile: 3441500541
+  password: pakistan
+  email: alice@evergreen.com
+  role: admin
+
+
+
+- username: bob
+  mobile: 3441500542
+  password: pakistan
+  email: bob@evergreen.com
+  role: admin
+
+
+
+- username: calum
+  mobile: 3441500543
+  password: pakistan
+  email: calum@evergreen.com
+  role: admin
+
+
+
+
+- username: ahmed
+  mobile: 3441500544
+  password: pakistan
+  email: ahmed@evergreen.com
+  role: admin
+
+  

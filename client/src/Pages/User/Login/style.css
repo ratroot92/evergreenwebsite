@@ -1,0 +1,33 @@
+.wrapper {
+    background-image: url("https://thumbs.dreamstime.com/b/security-concept-login-digital-background-pixelated-words-d-render-30468616.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.c-input-error-invalid {
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    color: red;
+}
+
+.c-input-error-valid {
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    color: red;
+}
+
+
+.c-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 1rem;
+}
+
+.c-input {
+    width: 25rem;
+    height: 3rem;
+    padding: 1rem;
+
+}

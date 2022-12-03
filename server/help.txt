@@ -1,0 +1,35 @@
+  ****************************
+  **** GIT URLS ****
+  ****************************
+
+
+
+  ###  CATEGORY SERVICE
+  https://github.com/ratroot92/evergreen_category_service
+
+  ###  AUTH SERVICE
+  https://github.com/ratroot92/evergreen_auth_microservice
+
+  ###  USER SERVICE
+  https://github.com/ratroot92/evergreen_auth_microservice
+
+  ###  COMMON LIBRARY
+  https://github.com/ratroot92/node-common
+
+
+
+sudo kill -9 $(lsof -i tcp:8000 -t)
+
+
+kill all node processes from cmd 
+ps aux | grep node
+ search for pts/x  //replace x with the number on your screen, in my case, it was 4. use it in the next step
+  killall -4 node
+
+
+
+
+
+npm i -g npm-check-updates
+ncu -u
+npm install
