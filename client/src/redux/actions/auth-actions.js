@@ -41,7 +41,7 @@ const { default: apiServer } = require('../../config/axios.config');
 
 const adminLogout = () => async (dispatch) => {
   try {
-    // dispatch(startLoading());
+    dispatch(startLoading());
     const { status } = await apiServer.get(`/auth/logout`);
     if (status === 200) {
       dispatch({ type: 'DO_ADMIN_LOGIN', payload: { user: null, isAuthenticated: false } });
@@ -51,7 +51,7 @@ const adminLogout = () => async (dispatch) => {
   } catch (err) {
     // dispatch({ type: 'DO_ADMIN_LOGIN', payload: true });
   } finally {
-    // dispatch(stopLoading());
+    dispatch(stopLoading());
   }
 };
 
