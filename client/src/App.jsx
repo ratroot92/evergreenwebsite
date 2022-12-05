@@ -24,6 +24,11 @@ import ProtectedAdminRoute from './hoc/ProtectedAdminRoute';
 // MUI Admin Pages
 import MuiAdminLogin from './Pages/MUI_Pages/MuiAdminLogin';
 import MuiAdminDashboard from './Pages/MUI_Pages/MuiAdminDashboard';
+import DashMain from './Pages/MUI_Pages/DashPages/DashMain';
+import DashOrders from './Pages/MUI_Pages/DashPages/DashOrders';
+import DashCustomers from './Pages/MUI_Pages/DashPages/DashCustomers';
+import DashReports from './Pages/MUI_Pages/DashPages/DashReports';
+import DashIntegrations from './Pages/MUI_Pages/DashPages/DashIntegrations';
 
 const override = {
   display: 'block',
@@ -83,7 +88,13 @@ export default function App() {
             </Route>
             <Route element={<ProtectedAdminRoute />}>
               {/* <Route path="/admin/dashboard" element={<AdminDashboardPage />} /> */}
-              <Route path="/admin/dashboard" element={<MuiAdminDashboard />} />
+              <Route path="/admin/dashboard" element={<MuiAdminDashboard children={<DashMain />} />} exact />
+              <Route path="/admin/dashboard/main" element={<MuiAdminDashboard children={<DashMain />} />} exact />
+              <Route path="/admin/dashboard/orders" element={<MuiAdminDashboard children={<DashOrders />} />} exact />
+              <Route path="/admin/dashboard/customers" element={<MuiAdminDashboard children={<DashCustomers />} />} exact />
+              <Route path="/admin/dashboard/reports" element={<MuiAdminDashboard children={<DashReports />} />} exact />
+              <Route path="/admin/dashboard/integrations" element={<MuiAdminDashboard children={<DashIntegrations />} />} exact />
+              {/* <Route path="/admin/dashboard" element={<MuiAdminDashboard />} /> */}
             </Route>
             <Route element={<ProtectedAdminRoute />}>
               <Route path="/admin/profile" element={<AdminProfilePage />} />

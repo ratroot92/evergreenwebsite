@@ -31,3 +31,13 @@
     padding: 1rem;
 
 }
+
+.dashLink {
+    color: black;
+    text-decoration: none;
+}
+
+.dashLink:hover {
+    color: #000000;
+    background-color: rgb(0, 0, 0);
+}

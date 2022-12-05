@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -12,36 +13,46 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 
 export const mainListItems = (
   <>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
+    <Link to="/admin/dashboard/main" className="dashLink">
+      <ListItemButton>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+    </Link>
+    <Link to="/admin/dashboard/orders" className="dashLink">
+      <ListItemButton>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Orders" />
+      </ListItemButton>
+    </Link>
+    <Link to="/admin/dashboard/customers" className="dashLink">
+      <ListItemButton>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Customers" />
+      </ListItemButton>
+    </Link>
+    <Link to="/admin/dashboard/reports" className="dashLink">
+      <ListItemButton>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Reports" />
+      </ListItemButton>
+    </Link>
+    <Link to="/admin/dashboard/integrations" className="dashLink">
+      <ListItemButton>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Integrations" />
+      </ListItemButton>
+    </Link>
   </>
 );
 

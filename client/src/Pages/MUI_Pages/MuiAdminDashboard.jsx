@@ -11,8 +11,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+
 import Button from '@mui/material/Button';
 // import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -22,10 +21,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminLogout } from '../../redux/actions/auth-actions';
 
+// import DashMain from './DashPages/DashMain';
 import { mainListItems, secondaryListItems } from './DashboardItems/listItems';
-import Chart from './DashboardItems/Chart';
-import Deposits from './DashboardItems/Deposits';
-import Orders from './DashboardItems/Orders';
+
+/* eslint-disable react/prop-types */
 
 function Copyright() {
   return (
@@ -85,7 +84,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+// { children }
+
+function DashboardContent({ children }) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -183,46 +184,8 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 0.3 }}>
-                    Welcome {user.username}!
-                  </Typography>
-                  <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 0.3 }}>
-                    Role: {user.role.name}
-                  </Typography>
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
+            {children}
+            {/* <DashMain /> */}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
@@ -231,6 +194,6 @@ function DashboardContent() {
   );
 }
 
-export default function MuiAdminDashboard() {
-  return <DashboardContent />;
+export default function MuiAdminDashboard({ children }) {
+  return <DashboardContent>{children}</DashboardContent>;
 }
