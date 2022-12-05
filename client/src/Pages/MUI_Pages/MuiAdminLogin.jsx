@@ -121,7 +121,7 @@ function MuiAdminLogin() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            opacity: 0.8
+            opacity: 0.7
           }}
         >
           <Typography component="h1" variant="h2" className='picText'>
