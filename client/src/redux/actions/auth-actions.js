@@ -62,9 +62,6 @@ const adminLogin = (payload) => async (dispatch) => {
     dispatch(startLoading());
     const { status, data } = await apiServer.post(`/auth/admin/login`, payload);
 
-    console.log('Status ==> ', status);
-    console.log('Dataaa ==> ', data);
-
     if (status === 200) {
       dispatch({ type: 'DO_ADMIN_LOGIN', payload: data.data });
     } else {

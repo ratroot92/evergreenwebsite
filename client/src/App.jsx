@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from './components/Navbar/UserNavbar';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Paper from '@mui/material/Paper';
 import { ClipLoader } from 'react-spinners';
 import ProtectedRoute from './hoc/ProtectedRoute';
 import { startSetAuth } from './redux/actions/auth-actions';
@@ -24,6 +25,11 @@ import ProtectedAdminRoute from './hoc/ProtectedAdminRoute';
 // MUI Admin Pages
 import MuiAdminLogin from './Pages/MUI_Pages/MuiAdminLogin';
 import MuiAdminDashboard from './Pages/MUI_Pages/MuiAdminDashboard';
+import DashMain from './Pages/MUI_Pages/DashPages/DashMain';
+import DashOrders from './Pages/MUI_Pages/DashPages/DashOrders';
+import DashCustomers from './Pages/MUI_Pages/DashPages/DashCustomers';
+import DashReports from './Pages/MUI_Pages/DashPages/DashReports';
+import DashIntegrations from './Pages/MUI_Pages/DashPages/DashIntegrations';
 
 const override = {
   display: 'block',
@@ -43,6 +49,10 @@ export default function App() {
     }
   }, []);
 
+  // commit 1
+  // commit 2
+  // commit 3
+
   return (
     // <div className="row">
     <>
@@ -56,42 +66,49 @@ export default function App() {
         </div>
       ) : (
         <>
-          {/* <Navbar /> */}
-          <Routes>
-            {/* <Route element={<ProtectedRoute />}> */}
-            {/* <Route path="/test-login" element={<MuiAdminLogin />} />
+            {/* <Paper style={{ height: '100vh' }}> */}
+            {/* <Navbar /> */}
+            <Routes>
+              {/* <Route element={<ProtectedRoute />}> */}
+              {/* <Route path="/test-login" element={<MuiAdminLogin />} />
             <Route path="/test-dashboard" element={<MuiAdminDashboard />} /> */}
-            <Route path="/" element={<MarketPage />} />
-            {/* </Route> */}
-            {/* User Routes Start */}
-            <Route element={<UnProtectedUserRoute />}>
-              <Route path="/user/login" element={<UserLoginPage />} />
-            </Route>
+              <Route path="/" element={<MarketPage />} />
+              {/* </Route> */}
+              {/* User Routes Start */}
+              <Route element={<UnProtectedUserRoute />}>
+                <Route path="/user/login" element={<UserLoginPage />} />
+              </Route>
 
-            <Route element={<ProtectedUserRoute />}>
-              <Route path="/user/dashboard" element={<UserDashboardPage />} />
-            </Route>
-            <Route element={<ProtectedUserRoute />}>
-              <Route path="/user/profile" element={<UserProfilePage />} />
-            </Route>
-            {/* User Routes End */}
+              <Route element={<ProtectedUserRoute />}>
+                <Route path="/user/dashboard" element={<UserDashboardPage />} />
+              </Route>
+              <Route element={<ProtectedUserRoute />}>
+                <Route path="/user/profile" element={<UserProfilePage />} />
+              </Route>
+              {/* User Routes End */}
 
-            {/* Admin Routes Start */}
-            <Route element={<UnProtectedAdminRoute />}>
-              {/* <Route path="/admin/login" element={<AdminLoginPage />} /> */}
-              <Route path="/admin/login" element={<MuiAdminLogin />} />
-            </Route>
-            <Route element={<ProtectedAdminRoute />}>
-              {/* <Route path="/admin/dashboard" element={<AdminDashboardPage />} /> */}
-              <Route path="/admin/dashboard" element={<MuiAdminDashboard />} />
-            </Route>
-            <Route element={<ProtectedAdminRoute />}>
-              <Route path="/admin/profile" element={<AdminProfilePage />} />
-            </Route>
+              {/* Admin Routes Start */}
+              <Route element={<UnProtectedAdminRoute />}>
+                {/* <Route path="/admin/login" element={<AdminLoginPage />} /> */}
+                <Route path="/admin/login" element={<MuiAdminLogin />} />
+              </Route>
+              <Route element={<ProtectedAdminRoute />}>
+                {/* <Route path="/admin/dashboard" element={<AdminDashboardPage />} /> */}
+                <Route path="/admin/dashboard" element={<MuiAdminDashboard children={<DashMain />} />} exact />
+                <Route path="/admin/dashboard/main" element={<MuiAdminDashboard children={<DashMain />} />} exact />
+                <Route path="/admin/dashboard/orders" element={<MuiAdminDashboard children={<DashOrders />} />} exact />
+                <Route path="/admin/dashboard/customers" element={<MuiAdminDashboard children={<DashCustomers />} />} exact />
+                <Route path="/admin/dashboard/reports" element={<MuiAdminDashboard children={<DashReports />} />} exact />
+                <Route path="/admin/dashboard/integrations" element={<MuiAdminDashboard children={<DashIntegrations />} />} exact />
+                {/* <Route path="/admin/dashboard" element={<MuiAdminDashboard />} /> */}
+              </Route>
+              <Route element={<ProtectedAdminRoute />}>
+                <Route path="/admin/profile" element={<AdminProfilePage />} />
+              </Route>
 
-            {/* Admin Routes Start */}
+              {/* Admin Routes Start */}
 
-            {/* <Route element={<ProtectedRoute />}>
+              {/* <Route element={<ProtectedRoute />}>
               <Route path="/user" element={<UserLoginPage />} />
             </Route>
 
@@ -103,8 +120,9 @@ export default function App() {
               <Route path="/product" element={<ProductPage />} />
             </Route> */}
 
-            <Route path="*" element={<RouteNotFound />} />
-          </Routes>
+              <Route path="*" element={<RouteNotFound />} />
+            </Routes>
+            {/* </Paper> */}
         </>
       )}
     </>
