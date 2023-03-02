@@ -22,7 +22,6 @@ async function adminLogin(args) {
     let user;
     if (type === 'email') {
         user = await UserModel.findOne({ email: payload }).populate(['role']);
-
         if (!user || !user.role.name) ThrowableErrors.ThrowUnauthrized();
         const number = 123123;
         await OtpModel.create({ user: user._id, number, delay: 30 });

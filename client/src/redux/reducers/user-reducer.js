@@ -1,12 +1,17 @@
-const userReducer = (state = {}, action = {}) => {
+/* eslint-disable  */
+const userReducer = (state = { allUsers: [] }, action = {}) => {
   switch (action.type) {
     case 'ADD_USER':
       return [...state, action.user];
     case 'DELETE_USER':
       return state.filter(({ _id }) => _id !== action._id);
-    case 'SET_USERS':
-      return action.users;
+    case 'GET_ALL_USERS':
+      let allUsers = action.payload;
+      if (action.payload.length) {
+        allUsers = action.payload.reduce((arr, user, index) => ((user.id = index), arr.push(user), arr), []);
+      }
 
+      return { ...state, allUsers };
     case 'EDIT_USER':
       return state.map((user) => {
         if (user._id === action.user._id) {

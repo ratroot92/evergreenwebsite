@@ -1,10 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable  */
 
-const startLoading = () => async (dispatch) => {
-  dispatch({ type: 'SET_LOADING', payload: true });
+const setLoading = (payload) => async (dispatch) => {
+  dispatch({ type: 'SET_LOADING', payload });
 };
-const stopLoading = () => async (dispatch) => {
-  dispatch({ type: 'SET_LOADING', payload: false });
-};
-export { startLoading, stopLoading };
+
+export { setLoading };

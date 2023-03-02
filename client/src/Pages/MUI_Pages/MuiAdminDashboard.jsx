@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -93,15 +94,6 @@ function DashboardContent({ children }) {
   };
 
   const dispatch = useDispatch();
-
-  const { user } = useSelector((state) => state.auth);
-
-  React.useEffect(() => {
-    console.log('useSelector dataaa => ', user.email);
-    console.log('useSelector mobile => ', user.mobile);
-    console.log('useSelector role => ', user.role.name);
-    console.log('useSelector name => ', user.username);
-  }, []);
 
   const handleLogout = () => {
     dispatch(adminLogout());
