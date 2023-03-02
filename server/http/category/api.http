@@ -1,0 +1,40 @@
+@hostname = http://localhost
+@port = 8000
+@host = {{hostname}}:{{port}}
+@createdAt = {{$datetime iso8601}}
+@modifiedBy = {{$processEnv USERNAME}}
+
+###
+
+
+# @name login
+POST {{host}}/api/auth/login HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "payload":"alice@evergreen.com",
+    "password":"pakistan",
+    "type":"email"
+    
+
+}
+
+
+###
+@authToken = Bearer {{login.response.body.accessToken}}
+GET {{host}}/api/category HTTP/1.1
+Content-Type: application/json
+authorization: {{authToken}}
+
+
+###
+POST {{host}}/api/category HTTP/1.1
+Content-Type: application/json
+authorization: {{authToken}}
+
+{
+    "name":"product1",
+    "category":"",
+}
+
