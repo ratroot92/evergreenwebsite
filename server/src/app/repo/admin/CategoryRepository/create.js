@@ -2,7 +2,6 @@ const { CategoryModel } = require('../../../models');
 
 async function create(args = {}) {
     try {
-        console.log;
         const category = await CategoryModel.create({
             name: args.body.name,
         });
@@ -17,7 +16,7 @@ async function create(args = {}) {
         if (err.code) {
             if (err.code === 11000) {
                 return Object.freeze({
-                    message: 'Duplicate entry!.',
+                    message: 'DUPLICATE_ENTRY',
                     headers: { 'Content-Type': 'application/json' },
                 });
             }

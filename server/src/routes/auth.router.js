@@ -15,7 +15,4 @@ auth.post('/admin/login', AdaptRequest({}), authController.adminLogin);
 auth.get('/is-authenticated', IsAuthenticated({}), AdaptRequest({}), authController.isAuthenticated);
 auth.get('/logout', IsAuthenticated({}), AdaptRequest({}), authController.logout);
 
-
-
-
 module.exports = auth;

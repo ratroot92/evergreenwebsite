@@ -2,5 +2,6 @@ const RoleModel = require('./Role');
 const UserModel = require('./User');
 const OtpModel = require('./Otp');
 const CategoryModel = require('./Category');
+const ProductModel = require('./Product');
 
-module.exports = { RoleModel, UserModel, CategoryModel, OtpModel };
+module.exports = { RoleModel, UserModel, CategoryModel, OtpModel, ProductModel };

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const { UserModel } = require('../../../models')
+const mongoose = require('mongoose');
+const { UserModel } = require('../../../models');
 
 async function create(args = {}) {
     try {
@@ -10,7 +10,7 @@ async function create(args = {}) {
             password: args.body.password,
             mobile: args.body.mobile,
             role: args.body.role,
-        })
+        });
 
         return Object.freeze({
             data: user,
@@ -18,33 +18,33 @@ async function create(args = {}) {
             statusCode: 200,
             headers: { 'Content-Type': 'application/json' },
             /// /  accessToken: getJWTToken({ user: args.user }),
-        })
+        });
     } catch (err) {
         if (err.code) {
             if (err.code === 11000) {
                 // const { status, message, data } = handleDuplicateFieldsDB(err)
                 return Object.freeze({
                     // data,
-                    message: 'Duplicate entry!.',
+                    message: 'DUPLICATE_ENTRY',
                     // statusCode: status,
                     headers: { 'Content-Type': 'application/json' },
                     /// /  accessToken: getJWTToken({ user: args.user }),
-                })
+                });
             }
             return Object.freeze({
                 message: err.message,
                 statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 /// /  accessToken: getJWTToken({ user: args.user }),
-            })
+            });
         }
         return Object.freeze({
             message: err.message,
             statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             /// /  accessToken: getJWTToken({ user: args.user }),
-        })
+        });
     }
 }
 
-module.exports = create
+module.exports = create;

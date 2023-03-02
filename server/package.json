@@ -27,8 +27,8 @@
     "prettier": "^2.7.1"
   },
   "scripts": {
-    "start": "NODE_ENV=development nodemon --delay 100ms ./src/server.js",
-    "dev": "NODE_ENV=development nodemon ./src/server.js"
+    "start": "NODE_ENV=development nodemon --ignore './public/*' ./src/server.js",
+    "dev": "NODE_ENV=development nodemon --ignore './public/*'  --delay 100ms ./src/server.js"
   },
   "repository": {
     "type": "git",

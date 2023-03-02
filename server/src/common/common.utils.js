@@ -47,6 +47,7 @@ function IsAuthenticated(options = {}) {
 
         try {
             let accessToken = req.headers.authorization;
+
             if (!accessToken) return res.status(401).json({ message: 'Missing accessToken.' });
             accessToken = accessToken.split(' ')[1];
             const decoded = JWT.verify(accessToken, process.env.JWT_SECRET, {
@@ -106,35 +107,36 @@ function AdaptRequest(options = {}) {
 const ReadFileAsync = util.promisify(fs.readFile);
 
 const ApiFeature = {
-    queryParams: {},
+    query: {},
     dbQuery: {},
     optional: {},
     init(options) {
-        this.queryParams = options.queryParams || {};
+        this.query = options.query || {};
         this.dbQuery = options.dbQuery || {};
         this.optional = options.optional || {};
         return this;
     },
     search() {
         // "i" case in-sensitive
-        const keyword = this.queryParams.keyword ? { name: { $regex: this.queryParams.keyword, $options: 'i' } } : {};
+        const keyword = this.query.keyword ? { name: { $regex: this.query.keyword, $options: 'i' } } : {};
         this.dbQuery = this.dbQuery.find({ ...keyword });
         return this;
     },
     filter() {
-        const queryParamsCopy = { ...this.queryParams };
+        const queryParamsCopy = { ...this.query };
+        console.log('queryParamsCopy', queryParamsCopy);
         // remove some fields
         const excludeFields = ['keyword', 'page', 'limit'];
         excludeFields.forEach((key) => delete queryParamsCopy[key]);
         let queryStr = JSON.stringify(queryParamsCopy);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-        this.queryParams = this.dbQuery.find(JSON.parse(queryStr));
+        this.query = this.dbQuery.find(JSON.parse(queryStr));
         return this;
     },
     pagination(resultPerPage = 10) {
-        const currentPage = Number(this.queryParams.page || 1);
+        const currentPage = Number(this.query.page || 1);
         const skip = resultPerPage * (currentPage - 1);
-        this.queryParams.limit(resultPerPage).skip(skip);
+        this.query.limit(resultPerPage).skip(skip);
         return this;
     },
 };

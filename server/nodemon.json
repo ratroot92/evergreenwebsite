@@ -3,7 +3,9 @@
     "delay": 200,
     "ignore": [
         "*.test.js",
-        "fixtures/*"
+        "fixtures/*",
+        "/home/asd/Desktop/development/Ropstam_App/server/public/*",
+        "./public/*"
     ],
     "execMap": {
         "rb": "ruby",

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const categorySchema = mongoose.Schema(
     {
-        name: { type: String, required: true, trim: true },
+        name: { type: String, required: true, trim: true, unique: true },
         thumbnail: { type: String },
         products: [{ type: mongoose.Types.ObjectId, ref: 'product' }],
         media: {
@@ -22,6 +22,10 @@ categorySchema.statics.existById = async function existById(id) {
     return id;
 };
 
+// categorySchema.pre('find', function (next) {
+//     this.populate('products');
+//     next();
+// });
 const Category = mongoose.model('category', categorySchema);
 
 module.exports = Category;
