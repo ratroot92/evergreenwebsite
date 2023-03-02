@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import authReducer from '../reducers/auth-reducer';
 import categoryReducer from '../reducers/category-reducer';
+import errorReducer from '../reducers/error-reducer';
 import productReducer from '../reducers/product-reducer';
 import uiReducer from '../reducers/ui-reducer';
 import userReducer from '../reducers/user-reducer';
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   ui: uiReducer,
   products: productReducer,
   categories: categoryReducer,
+  errors: errorReducer,
 });
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));

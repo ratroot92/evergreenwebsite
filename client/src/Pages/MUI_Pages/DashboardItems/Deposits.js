@@ -1,29 +1,34 @@
-
+/* eslint-disable  */
 import * as React from 'react';
-// import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 import Title from './Title';
+import { Link } from 'react-router-dom';
 
-// function preventDefault(event) {
-//   event.preventDefault();
-// }
-
-
-export default function Deposits() {
+function Deposits(props = {}) {
   return (
     <>
-      <Title>Recent Deposits</Title>
+      <Title>{props?.title || 'Recent Deposits'}</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        {props?.count || '$3,024.00'}
       </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+      <Typography color="text.secondary" xs={{ flex: 1 }}>
+        {props?.lastInserted || 'on 15 March, 2019'}
       </Typography>
       <div>
-        {/* <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link> */}
+        <Link color="primary" to={`/admin/dashboard/${props?.href}`} onClick={() => {}}>
+          {props?.href}
+        </Link>
       </div>
     </>
   );
 }
+
+Deposits.propTypes = {
+  title: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
+  href: PropTypes.string.isRequired,
+  lastInserted: PropTypes.string.isRequired,
+};
+
+export default Deposits;

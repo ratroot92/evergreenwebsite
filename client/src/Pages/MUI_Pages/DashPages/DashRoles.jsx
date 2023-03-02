@@ -5,13 +5,15 @@ import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../../../redux/actions/product-action';
+import { getAllRoles } from '../../../redux/actions/user-actions';
 
-export default function AllProducts() {
+function DashRoles() {
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.products.allProducts);
+  const allRoles = useSelector((state) => state.users.allRoles);
   React.useEffect(() => {
-    dispatch(getAllProducts({}));
+    if (allRoles.length === 0) {
+      dispatch(getAllRoles());
+    }
   }, []);
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -21,27 +23,11 @@ export default function AllProducts() {
       width: 150,
       editable: true,
     },
-    {
-      field: 'category',
-      headerName: 'Category',
-      width: 150,
-      editable: true,
-      valueGetter: (params) => `${params.row.category?.name || ''}`,
-    },
-
-    {
-      field: 'password',
-      headerName: 'Password',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) => `${params.row.name || ''} ${params.row.category?.name || ''}`,
-    },
   ];
 
   return (
     <>
-      {allProducts?.length > 0 ? (
+      {allRoles?.length > 0 ? (
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} lg={12}>
             <Paper
@@ -53,10 +39,10 @@ export default function AllProducts() {
               }}
             >
               <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 0.3 }}>
-                Products
+                Roles
               </Typography>
               <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 0.3 }}>
-                Number of Products: {allProducts?.length}
+                Number of Orders: {allRoles?.length}
               </Typography>
             </Paper>
           </Grid>
@@ -70,10 +56,10 @@ export default function AllProducts() {
               }}
             >
               <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 0.1 }}>
-                Products:
+                Roles:
               </Typography>
               <DataGrid
-                rows={allProducts}
+                rows={allRoles}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
@@ -90,3 +76,5 @@ export default function AllProducts() {
     </>
   );
 }
+
+export default DashRoles;

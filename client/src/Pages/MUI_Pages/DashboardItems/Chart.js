@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
@@ -25,7 +26,7 @@ export default function Chart() {
 
   return (
     <>
-      <Title>Today</Title>
+      {/* <Title>Today</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -52,7 +53,7 @@ export default function Chart() {
           </YAxis>
           <Line isAnimationActive={false} type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
         </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
     </>
   );
 }

@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers } from '../../../redux/actions/user-actions';
 
-export default function DashOrders() {
+export default function DashUsers() {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.users.allUsers);
   React.useEffect(() => {

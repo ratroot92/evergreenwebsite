@@ -30,7 +30,7 @@ const productController = {
     },
     async get(req, res) {
         const { dbQuery } = ApiFeature.init({
-            dbQuery: ProductModel.find({}).populate('category', '_id name media'),
+            dbQuery: ProductModel.find({}).populate('category', '_id name media').sort({ createdAt: -1 }),
             query: req.query,
         })
             .search()
@@ -41,7 +41,8 @@ const productController = {
     },
     async create(req, res) {
         try {
-            const category = await CategoryModel.findById(req.body.category).populate('products');
+            const category = await CategoryModel.findById(req.body.catId).populate('products');
+
             if (!category) {
                 return res.json({
                     message: 'CATEGORY_DOES_NOT_EXISTS',
@@ -50,20 +51,22 @@ const productController = {
             }
             const exists = await ProductModel.findOne({ name: req.body.name });
             if (exists || category.products.filter(({ name }) => name === req.body.name).length > 1) {
-                return res.json({
+                return res.status(409).json({
                     message: 'PRODUCT_ALREADY_EXISTS',
                     data: req.body,
                 });
             }
-            const product = new ProductModel({ name: req.body.name, category: category.name });
+            let product = new ProductModel({ name: req.body.name, category: category._id });
             category.products.push(product._id);
             await Promise.all([product.save(), category.save()]);
+            product = await ProductModel.findById(product._id).populate('category');
             return res.json({
                 data: product,
                 message: 'Product created successfully.',
                 statusCode: 200,
             });
         } catch (err) {
+            console.log(err);
             return res.status(500).json({
                 message: 'SOMETHING_WENT_WRONG',
                 data: err.stack,
