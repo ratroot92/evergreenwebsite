@@ -4,6 +4,7 @@ const categorySchema = mongoose.Schema(
     {
         name: { type: String, required: true, trim: true, unique: true },
         thumbnail: { type: String },
+        avatar: { type: String },
         products: [{ type: mongoose.Types.ObjectId, ref: 'product' }],
         media: {
             images: [{ type: String }],
