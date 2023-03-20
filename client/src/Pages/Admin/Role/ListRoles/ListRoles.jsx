@@ -5,9 +5,9 @@ import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllRoles } from '../../../redux/actions/user-actions';
+import { getAllRoles } from '../../../../redux/actions/user-actions';
 
-function DashRoles() {
+function ListRoles() {
   const dispatch = useDispatch();
   const allRoles = useSelector((state) => state.users.allRoles);
   React.useEffect(() => {
@@ -77,4 +77,4 @@ function DashRoles() {
   );
 }
 
-export default DashRoles;
+export default ListRoles;

@@ -24,6 +24,9 @@ import { adminLogout } from '../../redux/actions/auth-actions';
 
 // import DashMain from './DashPages/DashMain';
 import { mainListItems, secondaryListItems } from './DashboardItems/listItems';
+import { getAllCategories } from '../../redux/actions/category-actions';
+import { getAllProducts } from '../../redux/actions/product-action';
+import { getAllRoles, getAllUsers } from '../../redux/actions/user-actions';
 
 /* eslint-disable react/prop-types */
 
@@ -94,6 +97,13 @@ function DashboardContent({ children }) {
   };
 
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    // dispatch(getAllCategories());
+    // dispatch(getAllProducts());
+    // dispatch(getAllUsers());
+    // dispatch(getAllRoles());
+  }, []);
 
   const handleLogout = () => {
     dispatch(adminLogout());

@@ -3,10 +3,6 @@ const initialState = {
   user: null,
 };
 const authReducer = (state = initialState, action = {}) => {
-  console.log('==================================');
-  console.log('action.type          ==>', action.type);
-  console.log('action.payload       ==>', action.payload);
-  console.log('==================================');
   switch (action.type) {
     case 'SET_LOGIN':
       return { ...state, user: action.payload.user, isAuthenticated: action.payload.isAuthenticated };

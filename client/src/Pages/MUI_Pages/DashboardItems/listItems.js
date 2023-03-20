@@ -21,6 +21,15 @@ export const mainListItems = (
         <ListItemText primary="Dashboard" />
       </ListItemButton>
     </Link>
+
+    <Link to="/admin/dashboard/roles" className="dashLink">
+      <ListItemButton>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Roles" />
+      </ListItemButton>
+    </Link>
     <Link to="/admin/dashboard/users" className="dashLink">
       <ListItemButton>
         <ListItemIcon>
@@ -29,7 +38,7 @@ export const mainListItems = (
         <ListItemText primary="Users" />
       </ListItemButton>
     </Link>
-    <Link to="/admin/dashboard/categories" className="dashLink">
+    <Link to="/admin/dashboard/category" className="dashLink">
       <ListItemButton>
         <ListItemIcon>
           <PeopleIcon />

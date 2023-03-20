@@ -26,11 +26,14 @@ import ProtectedAdminRoute from './hoc/ProtectedAdminRoute';
 import MuiAdminLogin from './Pages/MUI_Pages/MuiAdminLogin';
 import MuiAdminDashboard from './Pages/MUI_Pages/MuiAdminDashboard';
 import DashMain from './Pages/MUI_Pages/DashPages/DashMain';
-import DashUsers from './Pages/MUI_Pages/DashPages/DashUsers';
-import DashCategories from './Pages/MUI_Pages/DashPages/DashCategories';
-import DashProducts from './Pages/MUI_Pages/DashPages/DashProducts';
+import UserPage from './Pages/Admin/User/index';
+import CategoryPage from './Pages/Admin/Category/index';
+import CategoryDetailPage from './Pages/Admin/Category/CategortDetail';
+
+import ProductPage from './Pages/Admin/Product/index';
+import RolePage from './Pages/Admin/Role/index';
+
 import DashIntegrations from './Pages/MUI_Pages/DashPages/DashIntegrations';
-import DashRoles from './Pages/MUI_Pages/DashPages/DashRoles';
 
 const override = {
   display: 'block',
@@ -93,10 +96,11 @@ export default function App() {
               {/* <Route path="/admin/dashboard" element={<AdminDashboardPage />} /> */}
               <Route path="/admin/dashboard" element={<MuiAdminDashboard children={<DashMain />} />} exact />
               <Route path="/admin/dashboard/main" element={<MuiAdminDashboard children={<DashMain />} />} exact />
-              <Route path="/admin/dashboard/users" element={<MuiAdminDashboard children={<DashUsers />} />} exact />
-              <Route path="/admin/dashboard/roles" element={<MuiAdminDashboard children={<DashRoles />} />} exact />
-              <Route path="/admin/dashboard/categories" element={<MuiAdminDashboard children={<DashCategories />} />} exact />
-              <Route path="/admin/dashboard/products" element={<MuiAdminDashboard children={<DashProducts />} />} exact />
+              <Route path="/admin/dashboard/users" element={<MuiAdminDashboard children={<UserPage />} />} exact />
+              <Route path="/admin/dashboard/roles" element={<MuiAdminDashboard children={<RolePage />} />} exact />
+              <Route path="/admin/dashboard/category" element={<MuiAdminDashboard children={<CategoryPage />} />} exact></Route>
+              <Route path="/admin/dashboard/category/detail/:id" element={<MuiAdminDashboard children={<CategoryDetailPage />} />} />
+              <Route path="/admin/dashboard/products" element={<MuiAdminDashboard children={<ProductPage />} />} exact />
               <Route path="/admin/dashboard/integrations" element={<MuiAdminDashboard children={<DashIntegrations />} />} exact />
               {/* <Route path="/admin/dashboard" element={<MuiAdminDashboard />} /> */}
             </Route>
