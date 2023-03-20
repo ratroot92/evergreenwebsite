@@ -4,13 +4,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv-safe').config({
     path: path.join(__dirname, `../.env.${process.env.NODE_ENV}`),
-    allowEmptyValues: true
+    allowEmptyValues: true,
 });
 const appRouter = require('./routes/index');
 const connectMongoDB = require('./config/mongo.db');
 const { ApiErrorMiddleware, AdaptRequest, ApplyApiValidation } = require('./common/common.utils');
 const Joi = require('@hapi/joi');
-
+const BrokerService = require('./broker/kafka');
 class EvergreenServer {
     app;
     _server;
@@ -18,10 +18,11 @@ class EvergreenServer {
     async run() {
         this._server = this.app
             .listen(process.env.PORT, process.env.HOST, () => {
-                console.log("-------------------------------------------------------------")
-                console.log(`${process.env.SERVICE_NAME} listening at [${process.env.HOST}:${process.env.PORT}][${process.env.NODE_ENV}]`);
-                console.log("-------------------------------------------------------------")
-
+                console.log('-------------------------------------------------------------');
+                console.log(
+                    `${process.env.SERVICE_NAME} listening at [${process.env.HOST}:${process.env.PORT}][${process.env.NODE_ENV}]`
+                );
+                console.log('-------------------------------------------------------------');
             })
             .on('error', function (error) {
                 process.once('SIGUSR2', function () {
@@ -53,34 +54,34 @@ class EvergreenServer {
         root.use(cors());
         root.use('/public', express.static(path.join(__dirname, '../public')));
         root.use('/media', express.static(path.join(__dirname, '../media')));
-        root.use(ApplyApiValidation({}))
+        root.use(ApplyApiValidation({}));
         root.use('/api', appRouter);
-        root.use(ApiErrorMiddleware)
+        root.use(ApiErrorMiddleware);
         root.use((req, res, next) => res.status(404).send('Route not found.'));
         this.app.use(root);
     }
 
-
     async connectDB() {
         try {
-            await connectMongoDB()
+            await connectMongoDB();
         } catch (err) {
-            console.log("Failed to Connect MongoDB ... Retyring in a while!.")
+            console.log('Failed to Connect MongoDB ... Retyring in a while!.');
             setTimeout(async () => {
-                await this.connectDB()
-            }, 3000)
+                await this.connectDB();
+            }, 3000);
         }
     }
-
 
     async letsGo() {
         try {
             await this.setupExpress();
             await this.setupRoutes();
             await this.connectDB();
+            // await BrokerService.run();
             await this.run();
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err);
+            throw new Error(err.message);
         }
     }
 

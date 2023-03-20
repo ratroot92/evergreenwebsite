@@ -305,7 +305,9 @@ const EmailManager = {
                 //   attachments: [{ filename: 'epe_rollno_slip.pdf', path: sysPath, contentType: 'application/pdf' }],
                 html:
                     options.html ||
-                    `<p> This email is originated from www.evergreen.com<p><p>Your Otp is <b>${options.otp} </b> </p>`,
+                    `<p> This email is originated from www.evergreen.com<p><p>Your Otp is <b>${
+                        options.otp || 1234
+                    } </b> </p>`,
             };
 
             return mailTransporter.sendMail(mailData);

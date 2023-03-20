@@ -3,6 +3,7 @@
 const bcryptjs = require('bcryptjs');
 const { ApiError, GetJwtToken, EmailManager, ThrowableErrors } = require('../../../../common/common.utils');
 const { UserModel, OtpModel } = require('../../../models');
+const BrokerService = require('../../../../broker/kafka');
 
 function EvaluateJWTExpiryInSeconds(val, unit) {
     switch (unit) {
@@ -63,6 +64,10 @@ async function login(args) {
     user = await UserModel.findByIdAndUpdate(user._id, {
         tokens: [...oldTokens, { token: accessToken, signedAt: Date.now().toString() }],
     }).select(['username', 'email', 'role', 'mobile']);
+    // await BrokerService.produceMessage({
+    //     topicName: BrokerService.ALL_TOPICS.TOPIC_TRACK_USER_LOGIN,
+    //     payload: { loginTime: new Date(), user },
+    // });
     return {
         message: 'User logged in successfully!.',
         statusCode: 200,

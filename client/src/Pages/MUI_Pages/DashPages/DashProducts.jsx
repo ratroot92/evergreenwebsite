@@ -4,6 +4,7 @@ import { Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewProduct, getAllProducts } from '../../../redux/actions/product-action';
 import { getAllCategories } from '../../../redux/actions/category-actions';
@@ -103,6 +104,17 @@ function AllProducts() {
       width: 150,
       editable: true,
       valueGetter: (params) => `${params.row.category?.name || ''}`,
+    },
+    {
+      field: 'id',
+      headerName: 'Detail',
+      width: 150,
+      editable: true,
+      renderCell: (params) => (
+        <span>
+          <Link to={`/admin/dashboard/products/${params.row._id}`}>View Detail</Link>
+        </span>
+      ),
     },
   ];
 
