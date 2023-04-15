@@ -10,6 +10,36 @@ const writeAsync = util.promisify(fs.writeFile);
 const existsAsync = util.promisify(fs.exists);
 const mkdirAsync = util.promisify(fs.mkdir);
 const categoryController = {
+    async updateCategoryPartial(req, res) {
+        try {
+            const category = await CategoryModel.findById(req.body._id);
+            if (category) {
+                const set = {};
+                const updateable = ['name'];
+                Object.keys(req.body).forEach((key) => {
+                    if (updateable.includes(key)) {
+                        set[key] = req.body[key];
+                    }
+                });
+                if (Object.keys(set).length) {
+                    const updatedCategory = await CategoryModel.findOneAndUpdate(
+                        { _id: req.body._id },
+                        { $set: set },
+                        { new: true, returnDocument: 'after', upsert: false }
+                    );
+                    return res.status(200).json({
+                        message: 'SUCCESS',
+                        data: updatedCategory,
+                    });
+                }
+            }
+        } catch (err) {
+            return res.status(500).json({
+                message: 'SOMETHING_WENT_WRONG',
+                data: err.message,
+            });
+        }
+    },
     async create(req, res) {
         try {
             let category = await CategoryModel.findOne({ name: req.body.name });

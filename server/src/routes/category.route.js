@@ -31,6 +31,7 @@ categoryRouter.get('/', IsAuthenticated(), AdaptRequest({}), categoryController.
 // POST
 
 categoryRouter.post('/', IsAuthenticated(), AdaptRequest({}), categoryController.create);
+categoryRouter.patch('/', IsAuthenticated(), AdaptRequest({}), categoryController.updateCategoryPartial);
 
 // DELETE
 
