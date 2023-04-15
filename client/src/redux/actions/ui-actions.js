@@ -1,7 +1,13 @@
 /* eslint-disable  */
 
+import APP_ACTIONS from '../constants/actions';
+
 const setLoading = (payload) => async (dispatch) => {
-  dispatch({ type: 'SET_LOADING', payload });
+  dispatch({ type: APP_ACTIONS.UI_ACTIONS.SET_LOADING, payload });
 };
 
-export { setLoading };
+const setNotifier = (payload) => async (dispatch) => {
+  dispatch({ type: APP_ACTIONS.UI_ACTIONS.SET_NOTIFICATION, payload });
+};
+
+export { setLoading, setNotifier };

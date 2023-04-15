@@ -14,7 +14,16 @@ const productReducer = (state = { allCategories: [], selectedCategory: {} }, act
     case 'SET_SELECTED_CATEGORY': {
       return { ...state, selectedCategory: action.payload };
     }
-
+    case 'UPDATE_CATEGORY_PARTIAL': {
+      return {
+        ...state,
+        selectedCategory: action.payload,
+        allCategories: allCategories.map((cat) => {
+          if (cat._id === action.payload._id) return action.payload;
+          else return cat;
+        }),
+      };
+    }
     default:
       return state;
   }

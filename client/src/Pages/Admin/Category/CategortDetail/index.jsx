@@ -4,16 +4,25 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import apiServer from '../../../../config/axios.config';
-import { getCategoryById, uploadCategoryAvatar } from '../../../../redux/actions/category-actions';
-
+import { getCategoryById, updateCategoryPartial, uploadCategoryAvatar } from '../../../../redux/actions/category-actions';
+import { useForm } from 'react-hook-form';
 export default function index(props) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
 
   let { id } = useParams();
   const [images, setImages] = React.useState([]);
+  const [state, setState] = React.useState({
+    isCategoryNameDisabled: true,
+  });
 
   const selectedCategory = useSelector((images) => images.categories.selectedCategory);
-  console.log('selectedCategory', selectedCategory);
+  // console.log('selectedCategory', selectedCategory);
   React.useEffect(() => {
     if (id) {
       dispatch(getCategoryById(id));
@@ -25,6 +34,16 @@ export default function index(props) {
   }, [images]);
 
   async function uploadAllImages() {}
+
+  async function updateCategoryName(fd) {
+    try {
+      dispatch(updateCategoryPartial(fd));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // console.log(watch('name'));
 
   async function uploadAvatar(image) {
     var fd = new FormData();
@@ -45,9 +64,76 @@ export default function index(props) {
   }
   return (
     <div>
-      <p>Name : {selectedCategory?.name}</p>
-      {/* <form onSubmit={uploadAvatar}> */}
       <div className="row">
+        <div className="col-md-8 0ffset-2 ">
+          {/*  */}
+          <form onSubmit={handleSubmit(updateCategoryName)}>
+            <div className="row " style={{ height: '500px' }}>
+              <div className="col-md-12  ">
+                <div className="row">
+                  <div className="col-md-12">
+                    <label className="  " style={{ fontSize: '12px', fontWeight: 'bold', color: 'green' }}>
+                      Category Name
+                    </label>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-10">
+                    <div className=" d-flex justify-content-center align-items-center">
+                      {selectedCategory?.name && (
+                        <input type="hidden" defaultValue={selectedCategory._id} {...register('_id', { required: true, value: selectedCategory._id })} />
+                      )}
+                      {selectedCategory?.name && (
+                        <input
+                          type="text"
+                          disabled={state.isCategoryNameDisabled}
+                          defaultValue={selectedCategory.name}
+                          {...register('name', { required: true, value: selectedCategory.name })}
+                          className="form-control form-control-sm"
+                          style={{ fontSize: '14px', borderRadius: '0px 0px 0px 0px' }}
+                        />
+                      )}
+                      {errors.name && <span>This field is required</span>}
+                    </div>
+                  </div>
+                  <div className="col-md-2">
+                    <div className="  d-flex justify-content-center align-items-center">
+                      {state.isCategoryNameDisabled ? (
+                        <button
+                          onClick={() => setState({ ...state, isCategoryNameDisabled: false })}
+                          className={`btn btn-sm btn-${state.isCategoryNameDisabled ? 'danger' : 'success'}`}
+                          style={{ height: '30px', borderRadius: '0px 0px 0px 0px' }}
+                        >
+                          Edit
+                        </button>
+                      ) : (
+                        <input
+                          type="submit"
+                          value="Update"
+                          className={`btn btn-sm btn-${state.isCategoryNameDisabled ? 'danger' : 'success'}`}
+                          style={{ height: '30px', borderRadius: '0px 0px 0px 0px' }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          {/*  */}
+
+          <div className="row ">
+            <div className="col-md-12 d-flex justify-content-center align-items-center">
+              <button className="btn btn-sm btn-success " style={{ fontSize: '14px', borderRadius: '0px 0px 0px 0px' }}>
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <form onSubmit={uploadAvatar}> */}
+      {/* <div className="row">
         {images?.imagesArr?.length &&
           images?.imagesArr?.map((image) => {
             return (
@@ -80,9 +166,9 @@ export default function index(props) {
         >
           Upload All
         </button>
-      </div>
+      </div> */}
 
-      <input
+      {/* <input
         type="file"
         multiple={true}
         onChange={(event) => {
@@ -97,7 +183,7 @@ export default function index(props) {
         name="images"
 
         // value={images?.images}
-      />
+      /> */}
       {/* </form> */}
     </div>
   );

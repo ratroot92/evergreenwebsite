@@ -42,7 +42,7 @@ export default function App() {
             <Route path="/admin/login" element={login ? otp ? NavigateAdminDashboard : NavigateAdminOtp : <AdminLogin />} />
             <Route path="/admin/otp" element={login ? otp ? NavigateAdminDashboard : <AdminOtp /> : NavigateAdminLogin} />
 
-            <Route path="*" element={<RouteNotFound />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </>
       )}
@@ -67,10 +67,10 @@ const DashboardAdmin = () => {
   );
 };
 
-const RouteNotFound = () => {
+const PageNotFound = () => {
   return (
     <div>
-      <p className="text-white">RouteNotFound</p>
+      <p className="text-white">PageNotFound</p>
     </div>
   );
 };

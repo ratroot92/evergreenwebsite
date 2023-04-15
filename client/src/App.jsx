@@ -34,7 +34,9 @@ import ProductPage from './Pages/Admin/Product/index';
 import RolePage from './Pages/Admin/Role/index';
 
 import DashIntegrations from './Pages/MUI_Pages/DashPages/DashIntegrations';
-
+import toast, { Toaster } from 'react-hot-toast';
+import { setLoading, setNotifier } from './redux/actions/ui-actions';
+import APP_ACTIONS from './redux/constants/actions';
 const override = {
   display: 'block',
   margin: '0 auto',
@@ -43,18 +45,27 @@ const override = {
 
 export default function App() {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.ui);
-
+  const { loading, successMessage } = useSelector((state) => state.ui);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   let [color, setColor] = React.useState('#ffffff');
 
   React.useEffect(() => {
-    if (loading) {
-      dispatch(handleAction({ url: '/auth/is-authenticated', type: 'SET_IS_AUTHENTICATED', reqType: 'get' }));
-    }
+    dispatch(handleAction({ url: '/auth/is-authenticated', type: APP_ACTIONS.AUTH_ACTIONS.SET_IS_AUTHENTICATED, reqType: 'get' }));
   }, []);
 
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      dispatch(setLoading(false));
+    }
+  }, [isAuthenticated]);
+
+  React.useEffect(() => {
+    if (successMessage) {
+      toast(successMessage);
+      dispatch(setNotifier(''));
+    }
+  }, [successMessage]);
   return (
-    // <div className="row">
     <>
       {loading ? (
         <div className="row">
@@ -127,8 +138,8 @@ export default function App() {
           {/* </Paper> */}
         </>
       )}
+      <Toaster />
     </>
-    // </div>
   );
 }
 
