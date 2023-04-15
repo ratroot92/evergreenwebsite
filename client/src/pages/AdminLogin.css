@@ -1,0 +1,57 @@
+.wrapper {
+  background-image: url(../assets/images/admin-login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.form-control {
+  border-radius: 0px 0px 0px 0px !important;
+  width: 30rem;
+}
+.container-fluid {
+  height: 100vh !important;
+}
+
+.input-control-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-valid {
+  color: green;
+  font-weight: 12px;
+}
+.c-label {
+  font-size: 14px;
+  margin-top: 2rem;
+  margin-top: 0.5rem;
+}
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.form-wrapper-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-submit {
+  border-radius: 0px 0px 0px 0px !important;
+}
+
+.btn-submit-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-valid {
+}
+.error-invalid {
+  font-size: 12px;
+  color: red;
+}

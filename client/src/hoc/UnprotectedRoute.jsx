@@ -2,12 +2,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-function ProtectedRoute({ element: Component, ...rest }) {
+function UnprotectedRoute({ element: Component, ...rest }) {
   const { user } = useSelector((state) => state.auth);
-  if (user) {
+  if (!user) {
     return <Outlet />;
   }
-  return <Navigate to="/login" />;
+  return <Navigate to="/" />;
 }
 
-export default ProtectedRoute;
+export default UnprotectedRoute;

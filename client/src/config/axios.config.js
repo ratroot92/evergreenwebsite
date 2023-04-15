@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { setLoading, setNotifier } from '../redux/actions/ui-actions';
-import store from '../redux/store/store';
+// import { setLoading, setNotifier } from '../redux/actions/ui-actions';
+// import store from '../redux/store';
 
 const apiServer = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -15,12 +15,11 @@ apiServer.interceptors.request.use(
   (request) => {
     console.log('request');
 
-    // store.dispatch(setLoading(true));
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       request.headers.authorization = `Bearer ${accessToken}`;
     }
-    store.dispatch(setLoading(true));
+    // store.dispatch(setLoading(true));
     return request;
   },
   (error) => {
@@ -36,19 +35,19 @@ apiServer.interceptors.response.use(
       // setNotifier(response.data.message);
       if (response.data.accessToken) {
         localStorage.setItem('accessToken', response.data.accessToken);
-        store.dispatch(setLoading(false));
+        // store.dispatch(setLoading(false));
         return response;
       }
-      store.dispatch(setLoading(false));
+      // store.dispatch(setLoading(false));
       return response;
     }
-    store.dispatch(setLoading(false));
+    // store.dispatch(setLoading(false));
     return response;
   },
   (error) => {
     console.log(error);
-    store.dispatch(setLoading(false));
-    store.dispatch(setNotifier(error.message));
+    // store.dispatch(setLoading(false));
+    // store.dispatch(setNotifier(error.message));
     return Promise.reject(error);
     //   if (error.response) {
     //     if (error.response.status === 401) {
