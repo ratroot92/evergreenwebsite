@@ -1,18 +1,38 @@
 import React from "react";
-import { FaSignInAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { loginUser, resetAuth } from "../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
+  const { isSuccess, isError, isLoading, user, message } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
-    email: "",
-    password: "",
+    email: "maliksblr92@gmail.com",
+    password: "pakistan123>",
   });
-
   function onChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    // if (isSuccess || user) {
+    //   navigate("/");
+    // }
+    dispatch(resetAuth);
+  }, [user, isError, isLoading, isSuccess, message, navigate, dispatch]);
+
   function onSubmit(e) {
     e.preventDefault();
+
+    dispatch(loginUser(formData));
   }
 
   return (
@@ -27,19 +47,19 @@ function Login(props) {
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <input
-              type="text"
+              type="email"
               className="form-control"
-              id="name"
-              name="name"
-              value={formData.name}
-              placeholder="Enter your name"
+              id="email"
+              name="email"
+              value={formData.email}
+              placeholder="Enter your email"
               onChange={onChange}
             />
           </div>
 
           <div className="form-group">
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="password"
               name="password"

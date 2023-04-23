@@ -1,20 +1,49 @@
 import React from "react";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { registerUser, resetAuth } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 function Register(props) {
+  const { isSuccess, isError, isLoading, user, message } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    firstName: "ahmed",
+    lastName: "kabeer",
+    email: "maliksblr92@gmail.com",
+    password: "pakistan123>",
+    confirmPassword: "pakistan123>",
   });
 
   function onChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function registerUser(e) {
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    // if (isSuccess || user) {
+    //   navigate("/");
+    // }
+    dispatch(resetAuth);
+  }, [user, isError, isLoading, isSuccess, message, navigate, dispatch]);
+
+  function onSubmit(e) {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("passwords do not match.");
+    } else {
+      dispatch(registerUser(formData));
+    }
+  }
+
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (
@@ -26,22 +55,33 @@ function Register(props) {
         <p>Please create an account</p>
       </section>
       <section className="form">
-        <form onSubmit={registerUser}>
+        <form onSubmit={onSubmit}>
           <div className="form-group">
             <input
               type="text"
               className="form-control"
-              id="name"
-              name="name"
-              value={formData.name}
-              placeholder="Enter your name"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              placeholder="Enter your first name"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              placeholder="Enter your last name"
               onChange={onChange}
             />
           </div>
 
           <div className="form-group">
             <input
-              type="text"
+              type="email"
               className="form-control"
               id="email"
               name="email"
@@ -53,7 +93,7 @@ function Register(props) {
 
           <div className="form-group">
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="password"
               name="password"
