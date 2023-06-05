@@ -18,7 +18,7 @@ categoryRouter.get(`/`, protect, async (req, res) => {
             if (category) {
                 return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: category });
             }
-            return res.status(404).json({ success: true, message: 'NOT_FOUND', dataReturned: category });
+            return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: category });
         }
         const products = await CategoryModel.find({});
         return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: products });
@@ -115,7 +115,7 @@ categoryRouter.post(`/avatar`, fsUtils.ensureUploadDirExist(uploadCategoryAvatar
             category = await CategoryModel.findOneAndUpdate({ _id: req.body._id }, { $set: { 'avatar.url': avatarUrl, 'avatar.publicId': req.file.filename } }, { new: true });
             return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: category });
         }
-        return res.status(404).json({ success: true, message: 'NOT_FOUND', dataReturned: category });
+        return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: category });
     } catch (err) {
         return res.status(500).json({ success: false, message: 'FAILURE', dataReturned: err.message });
     }
@@ -157,7 +157,39 @@ categoryRouter.post(`/media`, fsUtils.ensureUploadDirExist(uploadProductMediaDir
             return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: category });
         }
 
-        return res.status(404).json({ success: true, message: 'NOT_FOUND', dataReturned: category });
+        return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: category });
+    } catch (err) {
+        return res.status(500).json({ success: false, message: 'FAILURE', dataReturned: err.message });
+    }
+});
+
+categoryRouter.delete(`/media`, protect, async (req, res) => {
+    try {
+        if (req.query._id && req.query.publicId) {
+            let category = await CategoryModel.findById(req.body._id);
+            if (category) {
+                if (category.media.length) {
+                    const selectedMedia = category.media.filter((med) => med.publicId === req.query.publicId);
+                    if (selectedMedia) {
+                        if (await fsUtils.existsAsync(`${uploadProductMediaDir}/${selectedMedia.publicId}`)) {
+                            await fsUtils.unlinkAsync(`${uploadProductMediaDir}/${selectedMedia.publicId}`);
+                            const updatedMedia = category.media.filter((med) => med.publicId !== req.query.publicId);
+                            category = await CategoryModel.findOneAndUpdate({ _id: req.body._id }, { $set: { updatedMedia } }, { new: true });
+                        } else {
+                            return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: category });
+                        }
+                    } else {
+                        return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: category });
+                    }
+                } else {
+                    return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: category });
+                }
+            } else {
+                return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: category });
+            }
+        } else {
+            return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: {} });
+        }
     } catch (err) {
         return res.status(500).json({ success: false, message: 'FAILURE', dataReturned: err.message });
     }

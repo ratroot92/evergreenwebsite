@@ -15,7 +15,7 @@ productRouter.get(`/`, protect, async (req, res) => {
             if (product) {
                 return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: product });
             }
-            return res.status(404).json({ success: true, message: 'NOT_FOUND', dataReturned: product });
+            return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: product });
         }
         const products = await ProductModel.find({});
         return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: products });
@@ -114,7 +114,7 @@ productRouter.post(`//avatar`, fsUtils.ensureUploadDirExist(uploadProductAvatarD
             product = await ProductModel.findOneAndUpdate({ _id: req.body._id }, { $set: { 'avatar.url': avatarUrl, 'avatar.publicId': req.file.filename } }, { new: true });
             return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: product });
         }
-        return res.status(404).json({ success: true, message: 'NOT_FOUND', dataReturned: product });
+        return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: product });
     } catch (err) {
         return res.status(500).json({ success: false, message: 'FAILURE', dataReturned: err.message });
     }
@@ -156,7 +156,7 @@ productRouter.post(`//media`, fsUtils.ensureUploadDirExist(uploadProductMediaDir
             return res.status(200).json({ success: true, message: 'SUCCESS', dataReturned: product });
         }
 
-        return res.status(404).json({ success: true, message: 'NOT_FOUND', dataReturned: product });
+        return res.status(404).json({ success: false, message: 'NOT_FOUND', dataReturned: product });
     } catch (err) {
         return res.status(500).json({ success: false, message: 'FAILURE', dataReturned: err.message });
     }

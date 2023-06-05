@@ -54,15 +54,20 @@ function UploadProductMedia(props) {
     <>
       <section className="heading">Upload Media</section>
       <section>
+        <div className="row"></div>
         {selectedProduct.media.map((med) => {
+          console.log(med);
           return (
-            <img
-              src={`${process.env.REACT_APP_API_URL}${med.url}`}
-              height={250}
-              width={250}
-              alt={med.publicId}
-              className="img-fluid border"
-            />
+            <div className="col-md-4 border border-danger">
+              <img
+                key={media.publicId + media.url}
+                src={`${process.env.REACT_APP_API_URL}${med.url}`}
+                height={250}
+                width={250}
+                alt={med.publicId}
+                className="img-fluid border"
+              />
+            </div>
           );
         })}
       </section>

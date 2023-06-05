@@ -138,6 +138,26 @@ export const uploadCategoryMedia = createAsyncThunk(
   }
 );
 
+export const removeCategoryMedia = createAsyncThunk(
+  `/category/media`,
+  async (payload, thunkAPI) => {
+    try {
+      const { status, data } = await apiServer.delete(
+        `/category/media?_id=${payload._id}&publicId=${payload.publicId}`
+      );
+      if (status === 200 || status === 201) {
+        return data;
+      }
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const categorySlice = createSlice({
   name: "category",
   initialState,
