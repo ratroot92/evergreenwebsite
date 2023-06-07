@@ -1,0 +1,30 @@
+{
+  "basePath": "/api/v1/",
+  "info": {
+    "name": "Express Starter Development",
+    "version": "2.0.0",
+    "env": "dev"
+  },
+  "databases": {
+    "default": {
+      "user": "admin",
+      "password": "admin@123",
+      "options": {
+        "host": "localhost",
+        "database": "customer",
+        "requestTimeout": 300000,
+        "dialect": "postgres",
+        "logging": true,
+        "dialectOptions": {
+          "encrypt": false
+        }
+      }
+    }
+  },
+  "s3":{
+    "bucketName": "<bucket name>",
+    "accessKeyId": "<access id>",
+    "secretAccessKey": "<>",
+    "region": "<>"
+  }
+}
