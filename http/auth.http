@@ -1,0 +1,51 @@
+@hostname = http://0.0.0.0
+@port = 8000
+@host = {{hostname}}:{{port}}
+@createdAt = {{$datetime iso8601}}
+@modifiedBy = {{$processEnv USERNAME}}
+
+###
+
+
+# @name login
+POST {{host}}/api/auth/login HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "payload":"alice@evergreen.com",
+    "password":"pakistan",
+    "type":"email"
+    
+
+}
+
+
+
+
+
+
+
+###
+POST http://0.0.0.0:8000/
+Content-Type:"application/json"
+{
+    "email":"alan@evergreen.com",
+    "password":"pakistan123>"
+
+}
+
+
+###
+POST http://0.0.0.0:8000/api/v1/user
+Content-Type:"application/json"
+
+{
+    "firstName":"alan",
+    "lastName":"bob",
+    "email":"alan@evergreen.com",
+    "password":"pakistan123>",
+    "role":"admin"
+
+
+}

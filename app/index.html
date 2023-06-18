@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <!-- <title>Autobridge Service Provider Panel</title> -->
+  <title>Autobridge</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="manifest" href="./manifest.json">
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./firebase-messaging-sw.js')
+        .then(function (registration) {
+          console.log('Registration successful, scope is:', registration.scope);
+        }).catch(function (err) {
+          console.log('Service worker registration failed, error:', err);
+
+        });
+
+      // navigator.serviceWorker.addEventListener('message', event => {
+      //   console.log("message in html=",event)
+      //   let data = event.data;
+      //   let pushdata = JSON.parse(data.data.orderData)
+      //   localStorage.setItem("pushdata",data.data.orderData)
+      //   console.log("pushdata = ",pushdata) 
+      //   if(data.messageType == 'push-received')
+      //     console.log("web foreground")
+      //  else  if(data.messageType == 'notification-clicked')
+      //     console.log("web background")
+      //  window.open("https://www.google.com/")   
+      //   // Add handler here
+      // });
+    }
+  </script>
+
+  <!-- <link rel="icon" href="favicon.jpg" type="image/jpg"  sizes="32x32"> -->
+
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.jpg"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+
+  <!-- plugin css -->
+  <link href="./assets/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/jquery-jvectormap-1.2.2.css"></noscript>
+  <!-- Third party css start -->
+  <link href="./assets/css/flatpickr.min.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/flatpickr.min.css"></noscript>
+  <link href="./assets/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/bootstrap-datepicker.min.css"></noscript>
+  <link href="./assets/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/dataTables.bootstrap4.css"></noscript>
+  <link href="./assets/css/responsive.bootstrap4.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/responsive.bootstrap4.css"></noscript>
+  <link href="./assets/css/buttons.bootstrap4.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/buttons.bootstrap4.css"></noscript>
+  <link href="./assets/css/select.bootstrap4.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/select.bootstrap4.css"></noscript>
+  <link href="./assets/css/dropzone.min.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/dropzone.min.css"></noscript>
+  <style>@charset "UTF-8";</style><link href="./assets/css/dropify.min.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/dropify.min.css"></noscript>
+
+  <!-- Third party css end -->
+  <!-- App css -->
+  <style>@charset "UTF-8";:root{--blue:#4a81d4;--indigo:#675aa9;--purple:#6658dd;--pink:#f672a7;--red:#f1556c;--orange:#fd7e14;--yellow:#f7b84b;--green:#1abc9c;--teal:#02a8b5;--cyan:#4fc6e1;--white:#fff;--gray:#98a6ad;--gray-dark:#343a40;--primary:#6658dd;--secondary:#6c757d;--success:#1abc9c;--info:#4fc6e1;--warning:#f7b84b;--danger:#f1556c;--light:#f1f5f7;--dark:#323a46;--pink:#f672a7;--blue:#4a81d4;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:"Nunito",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;}*,::after,::before{-webkit-box-sizing:border-box;box-sizing:border-box;}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;}body{margin:0;font-family:Nunito,sans-serif;font-size:.875rem;font-weight:400;line-height:1.5;color:#6c757d;text-align:left;background-color:#f5f6f8;}</style><link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/bootstrap.min.css"></noscript>
+  <style>@charset "UTF-8";</style><link href="./assets/css/icons.min.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/icons.min.css"></noscript>
+  <style>@import url(https://fonts.googleapis.com/css?family=Nunito:400,600,700,900);@import url('https://fonts.googleapis.com/css?family=Lato:300i,400,400i,700,700i,900,900i&display=swap');html{position:relative;min-height:100%;}body{padding-bottom:60px;overflow-x:hidden;}@media (max-width:767.98px){body{overflow-x:hidden;padding-bottom:80px;}}@media print{body{padding:0;margin:0;}}@media screen and (-webkit-min-device-pixel-ratio:0){}body{background-image:url(../images/bg-pattern.png);background-color:#cc1d48;background-size:cover;background-position:center;}</style><link href="./assets/css/app.min.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/app.min.css"></noscript>
+<link rel="stylesheet" href="styles.eafb36a3b4ddea3164b8.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.eafb36a3b4ddea3164b8.css"></noscript><style>:root{--fc-daygrid-event-dot-width:8px;}</style><link rel="stylesheet" href="main.a936ceae2accefee18ea.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="main.a936ceae2accefee18ea.css"></noscript><style>
+  #example-select1 {
+    display: inherit;
+    width: auto;
+    height: auto;
+    padding: 0;
+  }
+
+  #basic-datatable_filter {
+    display: none;
+  }
+
+  table tr td a {
+    color: #6c757d;
+  }
+
+  .scroll-dv {
+    width: 100%;
+    overflow: hidden
+  }
+
+  .scroll-dv .table-scrl {
+    overflow-x: scroll
+  }
+
+  .table-centered {
+    border: 1px solid #ccc;
+  }
+
+  .table-centered tr td,
+  .table-centered th {
+    border-left: 1px solid #ccc;
+  }
+
+  .fc-scroller {
+    overflow: scroll !important;
+    height: auto !important;
+  }
+</style></head>
+
+
+<body>
+  <app-root></app-root>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" async=""></script>
+  <script src="./assets/js/vendor.min.js" async="" type="text/javascript"></script>
+  <!-- <script src="./assets/js/bootstrap.js" async type="text/javascript"></script> -->
+  <script src="./assets/js/flatpickr.min.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/bootstrap-datepicker.min.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/countdown.js" async="" type="text/javascript"></script>
+  <!-- <script src="./assets/js/jquery.dataTables.min.js" async type="text/javascript"></script> -->
+  <!-- <script src="./assets/js/dataTables.bootstrap4.js" async type="text/javascript"></script> -->
+  <script src="./assets/js/responsive.bootstrap4.min.js" async="" type="text/javascript"></script>
+  <!-- <script src="./assets/js/dataTables.buttons.min.js" async type="text/javascript"></script> -->
+  <script src="./assets/js/fullcalendar.min.js" async="" type="text/javascript"></script>
+  <!-- <script src="./assets/js/datatables.init.js" async type="text/javascript"></script> -->
+  <script src="./assets/js/form-pickers.init.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/Chart.bundle.min.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/dashboard3.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/app.min.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/moment.min.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/jquery-ui.min.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/calendar.init.js" async="" type="text/javascript"></script>
+
+  <!-- Plugins js -->
+  <script src="./assets/js/dropzone.min.js" async="" type="text/javascript"></script>
+  <script src="./assets/js/dropify.min.js" async="" type="text/javascript"></script>
+
+  <!-- Init js-->
+  <script src="./assets/js/form-fileuploads.init.js" async="" type="text/javascript"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgGq4gbKYtTKWcjXtxq0uzkM-v3bbSkMg&amp;libraries=places&amp;language=en"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.parent').click(function () {
+        $('.sub-nav').toggleClass('visible');
+      });
+      $('.parent1').click(function () {
+        $('.sub-nav1').toggleClass('visible');
+      });
+      $('.parent2').click(function () {
+        $('.sub-nav2').toggleClass('visible');
+      });
+    });
+  </script>
+  <!-- 
+        <script type="text/javascript">
+          $(document).ready(function(){
+          $(".addCF").click(function(){
+            $("#customFields").append('<div class="row"><div class="col-md-5"><div class="form-group"><label>Select Location</label><select class="form-control" id="example-select"><option>Select Location</option></select></div></div><div class="col-md-3"><div class="form-group"><label>Cost</label><input type="number" value="1" class="form-control"></div></div>  &nbsp; <a href="javascript:void(0);" class="remCF btn btn-danger btn-sm" style="display: inline-table;margin: 30px 0 0;">Remove</a></div>');
+          });
+            $("#customFields").on('click','.remCF',function(){
+                $(this).parent().remove();
+            });
+
+            $(document).on('click', '[data-toggle^="class"]', function(e){
+              e && e.preventDefault();
+              var $this = $(e.target), $class , $target;
+              !$this.data('toggle') && ($this = $this.closest('[data-toggle^="class"]'));
+                $class = $this.data()['toggle'].split(':')[1];
+                $target = $( $this.data('target') || $this.attr('href') );
+                $target.toggleClass($class);
+                $this.toggleClass('active');
+            });
+        });
+          </script> -->
+
+<script src="runtime.7b1a3a7f1ef4910084a7.js" defer></script><script src="polyfills.357688a9c63b238d381c.js" defer></script><script src="scripts.6665fa8566055f7e4a56.js" defer></script><script src="main.a0b31e9d04b50416b4da.js" defer></script>
+
+</body></html>

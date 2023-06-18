@@ -1,0 +1,3 @@
+https://github.com/kkrishnakv/express-ts-starter/blob/master/src/express.api.ts
+
+https://www.youtube.com/watch?v=IIrPdHw2qV8&ab_channel=CodeTechFacts
